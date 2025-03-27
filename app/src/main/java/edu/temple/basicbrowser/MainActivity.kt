@@ -6,6 +6,9 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.ImageButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,12 +24,26 @@ class MainActivity : AppCompatActivity() {
         goButton = findViewById(R.id.goButton)
         webView = findViewById(R.id.webView)
 
+
+
+
         // Allow your browser to intercept hyperlink clicks
         webView.webViewClient = object: WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
             }
+
         }
+        goButton.setOnClickListener(){
+            val url = urlEditText.text.toString()
+
+            webView.loadUrl(if(url.startsWith("http://")){
+                url
+            } else {
+                "https://" + url
+            })
+        }
+        webView.loadUrl(urlEditText.toString())
 
     }
 }
