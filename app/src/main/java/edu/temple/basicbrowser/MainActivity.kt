@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 "https://" + url
             })
         }
-        webView.loadUrl(urlEditText.toString())
+
 
     }
 }
